@@ -16,7 +16,5 @@ public class ZombieFaction : MonoBehaviour {
         m.enabled = true;
 
         m.material.color = (Color)colorList[(int)faction];
-    }
-
-    
+    }    
 }
