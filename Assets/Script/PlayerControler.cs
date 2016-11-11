@@ -4,12 +4,12 @@ using System.Collections;
 using UnityEditor;
 #endif
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerControler : MonoBehaviour
 {
 
     //[Range(0.0f, 10.0f)]
-    public float MaxSpeed;
-    public float Speed;
+    public float Speed = 0.5f;
 
     [Range(0.0f, 100.0f)]
     public float MouseSpeedFactor = 1.5f;
@@ -20,7 +20,7 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody rigidBody;
     public float thrust;
     public GameObject character;
-    //private CharacterController CharCtrl;
+    private CharacterController CharCtrl; 
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
-        //CharCtrl = this.GetComponent<CharacterController>();
+        CharCtrl = this.GetComponent<CharacterController>();
         mainCamera = this.GetComponentInChildren<Camera>();
         rigidBody = this.GetComponent<Rigidbody>();
     }
@@ -39,7 +39,7 @@ public class PlayerControler : MonoBehaviour
 
 
     void FixedUpdate()
-    {
+    {/*
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
@@ -49,7 +49,7 @@ public class PlayerControler : MonoBehaviour
 
         Vector3 speedVector = new Vector3(rigidBody.velocity.x, 0.0f, rigidBody.velocity.z);
         if (speedVector.magnitude <= MaxSpeed)
-            rigidBody.AddForce(direction * Speed, ForceMode.Impulse);
+            rigidBody.AddForce(direction * Speed, ForceMode.Impulse);*/
 
         //rigidBody.velocity = direction * moveFactor + Vector3.up * yVelocity;
     }
@@ -94,45 +94,40 @@ public class PlayerControler : MonoBehaviour
         mainCamera.transform.rotation = Quaternion.Euler(gimbalLock,
                                                          mainCamera.transform.rotation.eulerAngles.y,
                                                          0f);
+        
 
-        float position = 0;
-
+        Vector3 positionVec = new Vector3();
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-
-            Vector3 newPosition = character.transform.position;
-            newPosition += mainCamera.transform.right;
-            newPosition.y = position;
-            character.transform.position = newPosition;
+            positionVec += mainCamera.transform.right;
+            //character.transform.position = newPosition;
 
         }
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Q))
         {
 
-            Vector3 newPosition = character.transform.position;
-            newPosition -= mainCamera.transform.right;
-            newPosition.y = position;
-            character.transform.position = newPosition;
+            positionVec -= mainCamera.transform.right;
+            //character.transform.position = newPosition;
 
         }
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z))
         {
 
-            Vector3 newPosition = character.transform.position;
-            newPosition += mainCamera.transform.forward;
-            newPosition.y = position;
-            character.transform.position = newPosition;
+            positionVec += mainCamera.transform.forward;
+            //character.transform.position = newPosition;
 
         }
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            Vector3 newPosition = character.transform.position;
-            newPosition -= mainCamera.transform.forward;
-            newPosition.y = position;
-            character.transform.position = newPosition;
+            positionVec -= mainCamera.transform.forward;
+            //character.transform.position = newPosition;
 
         }
 
+        positionVec.y = 0;
+        positionVec.Normalize();
+        positionVec *= Speed;
+        CharCtrl.Move(positionVec);
         Quaternion r = character.transform.rotation;
         character.transform.rotation = Quaternion.Euler(0, r.eulerAngles.y, 0);
     }

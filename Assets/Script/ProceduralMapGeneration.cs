@@ -49,6 +49,12 @@ public class ProceduralMapGeneration : MonoBehaviour {
         float position = (int)(cityCenterPerimeter + cityBanlieurPerimeter + cityCampagnePerimeter);
         float demiPosition = position * 0.5f;
 
+        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        floor.name = "Floor";
+        floor.transform.parent = m_father.transform;
+        floor.transform.localScale = new Vector3(position, 1, position);
+        floor.transform.position = new Vector3(0, -1, 0);
+
         while ((i < nbSkyscrapper) || (j < nbHouse) || (k < nbCampagneHouse))
         {
             currentX = (float)(m_randomEngine.NextDouble() * position - demiPosition);
