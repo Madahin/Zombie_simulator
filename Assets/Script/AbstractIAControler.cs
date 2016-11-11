@@ -9,9 +9,10 @@ public abstract class AbstractIAControler : MonoBehaviour {
 
     protected bool seeTargetable = false;
 
+    public float visionDistance = 100;
     public float roamingDistance = 10;
-    public float maxDistance;
-    public float minDistance;
+    public float maxDistance = 10;
+    public float minDistance = 0.1f;
     
     public float attackDistance;
 

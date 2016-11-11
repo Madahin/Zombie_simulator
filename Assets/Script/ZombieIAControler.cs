@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class ContactIAControler : AbstractIAControler {
+public class ZombieIAControler : AbstractIAControler {
 
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
@@ -49,6 +49,27 @@ public class ContactIAControler : AbstractIAControler {
 
     protected override void ComputeIA()
     {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, visionDistance, transform.forward);
+
+        if (hits.Length > 0)
+        {
+            hits = Array.FindAll(hits, (i) => i.transform.gameObject.tag == "Human" && i.distance < visionDistance);
+            if (hits.Length > 0)
+            { 
+                Array.Sort(hits, (i1, i2) => i1.distance.CompareTo(i2.distance));
+                target = hits[0].transform;
+                seeTargetable = true;
+            }
+            else
+            {
+                if (target != null && seeTargetable)
+                {
+                    target = null;
+                    seeTargetable = false;
+                }
+            }
+        }
+
         if (target == null)
         {
             GameObject t = new GameObject();
@@ -64,7 +85,10 @@ public class ContactIAControler : AbstractIAControler {
 
             if (distance < minDistance)
             {
-                Destroy(target.gameObject);
+                if (!seeTargetable)
+                {
+                    Destroy(target.gameObject);
+                }
                 target = null;
             }
         }

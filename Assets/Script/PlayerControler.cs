@@ -17,7 +17,6 @@ public class PlayerControler : MonoBehaviour
     public float height = 1.5f;
 
     private Camera mainCamera;
-    private Rigidbody rigidBody;
     public float thrust;
     public GameObject character;
     private CharacterController CharCtrl; 
@@ -33,7 +32,6 @@ public class PlayerControler : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
         CharCtrl = this.GetComponent<CharacterController>();
         mainCamera = this.GetComponentInChildren<Camera>();
-        rigidBody = this.GetComponent<Rigidbody>();
     }
 
 
