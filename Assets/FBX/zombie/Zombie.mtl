@@ -1,0 +1,338 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 10.09.2013 21:12:48
+
+newmtl face
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\Front face.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\Front face.jpg
+
+newmtl back_head
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\back head.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\back head.jpg
+
+newmtl left_head
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\Left side head.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\Left side head.jpg
+
+newmtl right_head
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\right head.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\right head.jpg
+
+newmtl bottom
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\bottum.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\bottum.jpg
+
+newmtl top
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\top.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\head\top.jpg
+
+newmtl front
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\Left Front leg.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\Left Front leg.jpg
+
+newmtl back_leg
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\left back leg.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\left back leg.jpg
+
+newmtl outside
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\Outside leg .jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\Outside leg .jpg
+
+newmtl inside
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\inside leg.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\inside leg.jpg
+
+newmtl Material__307
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\zombie foot.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\zombie foot.jpg
+
+newmtl Material__282
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\top leg.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\leg\top leg.jpg
+
+newmtl bottom_body
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\bottom.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\bottom.jpg
+
+newmtl left_body_side
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\left body side.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\left body side.jpg
+
+newmtl right_body
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\right body side.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\right body side.jpg
+
+newmtl neck
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\neck.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\neck.jpg
+
+newmtl back
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\back body.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\back body.jpg
+
+newmtl front_body
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\zombiefrontbody.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\body\zombiefrontbody.jpg
+
+newmtl front_arm
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\front arm.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\front arm.jpg
+
+newmtl back_arm
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\back arm.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\back arm.jpg
+
+newmtl outside_arm
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\outside arm.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\outside arm.jpg
+
+newmtl inner_arm
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\inner arm.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\inner arm.jpg
+
+newmtl hand
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\hand.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\hand.jpg
+
+newmtl shoulder
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\sholder.jpg
+	map_Kd C:\Users\danilo\Desktop\editing stuff\3d projects\3ds max\minecraft stuff\arm\sholder.jpg
