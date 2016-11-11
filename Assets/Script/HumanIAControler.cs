@@ -60,7 +60,6 @@ public class HumanIAControler : AbstractIAControler {
                 Vector3 bary = new Vector3();
                 foreach (RaycastHit hit in hits)
                 {
-                    Debug.Log(hit.distance + " " + (hit.transform.position - transform.position));
                     bary += /*hit.distance * */(hit.transform.position - transform.position);
                 }
                 //Debug.Log(bary);
