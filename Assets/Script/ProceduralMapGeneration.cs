@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 public class ProceduralMapGeneration : MonoBehaviour {
 
@@ -32,10 +33,20 @@ public class ProceduralMapGeneration : MonoBehaviour {
 
     private System.Random m_randomEngine = null;
 
+    public Material mur;
+    public Material mur1;
+    public Material immeuble;
+    public Material road;
+
     public void BuildObject()
     {
         Reset();
         m_father = new GameObject("City");
+
+        immeuble.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        mur.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        mur1.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        road.mainTexture.wrapMode = TextureWrapMode.Repeat;
 
         uint centerX = 0;
         uint centerY = 0;
@@ -55,6 +66,12 @@ public class ProceduralMapGeneration : MonoBehaviour {
         floor.transform.localScale = new Vector3(position, 1, position);
         floor.transform.position = new Vector3(0, -1, 0);
 
+        MeshRenderer renderer1 = floor.GetComponent<MeshRenderer>();
+
+        renderer1.material = new Material(road);
+        Vector2 size = new Vector2(position, position);
+        renderer1.material.mainTextureScale = size;
+
         while ((i < nbSkyscrapper) || (j < nbHouse) || (k < nbCampagneHouse))
         {
             currentX = (float)(m_randomEngine.NextDouble() * position - demiPosition);
@@ -66,6 +83,7 @@ public class ProceduralMapGeneration : MonoBehaviour {
             GameObject buildingObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             buildingObject.name = "batiment_" + (i + j + k);
             buildingObject.transform.parent = m_father.transform;
+            MeshRenderer renderer = buildingObject.GetComponent<MeshRenderer>();
 
             Rect building = new Rect();
             if (dist < cityCenterPerimeter) // City center
@@ -76,6 +94,12 @@ public class ProceduralMapGeneration : MonoBehaviour {
                 buildingObject.transform.localScale = new Vector3(building.width,
                                                                   skyscrapperHeight + m_randomEngine.Next(-skyscrapperErrorHeight, skyscrapperErrorHeight),
                                                                   building.height);
+
+                
+                
+                renderer.material = new Material(immeuble);
+                Vector2 size1 = new Vector2(building.width*0.5f, building.height*0.5f);
+                renderer.material.mainTextureScale = size1;
             }
             else // Banlieu
             {
@@ -85,6 +109,15 @@ public class ProceduralMapGeneration : MonoBehaviour {
                 buildingObject.transform.localScale = new Vector3(building.width,
                                                                   houseHeight + m_randomEngine.Next(-houseErrorHeight, houseErrorHeight),
                                                                   building.height);
+
+                
+
+                int leRandom = m_randomEngine.Next(0,2);
+                if (leRandom == 0){ renderer.material = new Material(mur);}
+                else{renderer.material = new Material(mur1);}
+
+                Vector2 size2 = new Vector2(building.width*1.25f, building.height);
+                renderer.material.mainTextureScale = size2;
             }
             buildingObject.transform.position = new Vector3(currentX, buildingObject.transform.localScale.y / 2, currentY);
 
