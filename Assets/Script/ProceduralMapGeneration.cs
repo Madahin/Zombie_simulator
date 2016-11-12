@@ -149,7 +149,7 @@ public class ProceduralMapGeneration : MonoBehaviour {
             }
         }
 
-        /*for(uint n=0; n < nbLighTorch; n++)
+        for(uint n=0; n < nbLighTorch; n++)
         {
             uint proba = (uint)m_randomEngine.Next(100);
 
@@ -185,7 +185,7 @@ public class ProceduralMapGeneration : MonoBehaviour {
             {
                 n--;
             }
-        }*/
+        }
 
         for (uint n = 0; n < nbHuman; n++)
         {
