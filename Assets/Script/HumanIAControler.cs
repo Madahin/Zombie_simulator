@@ -7,8 +7,7 @@ public class HumanIAControler : AbstractIAControler {
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
     public int wasHit = -1;
-    private float timeUntilZombie = 0;
-    
+    private float timeUntilZombie = 0;    
 
     // Use this for initialization
     protected override void Start ()

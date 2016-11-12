@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class ZombieIAControler : AbstractIAControler {
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
+
+    public GameObject humanDie;
+    public GameObject zombieDie;
     
 
     // Use this for initialization
@@ -58,6 +61,16 @@ public class ZombieIAControler : AbstractIAControler {
                 {
                     SceneManager.LoadScene("GameOver");
                 }
+
+                if(target.gameObject.GetComponent<ZombieIAControler>())
+                {
+                    Instantiate(zombieDie);
+                }
+                else if(target.gameObject.GetComponent<HumanIAControler>())
+                {
+                    Instantiate(humanDie);
+                }
+
                 Destroy(target.gameObject);
                 target = null;
             }
