@@ -59,8 +59,15 @@ public class Entity : MonoBehaviour {
     {
         if (!isHit)
         {
+            if (rendere != null)
+                c = rendere.material.color;
+
+            if (mrenderer != null)
+                c = mrenderer.material.color;
             isHit = true;
             m_pv -= 1;
+            if(GetComponent<HurtSound>())
+                GetComponent<HurtSound>().Sound();
         }
     }
 }

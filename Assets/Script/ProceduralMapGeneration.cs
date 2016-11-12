@@ -8,6 +8,8 @@ public class ProceduralMapGeneration : MonoBehaviour {
     public uint nbSkyscrapper = 50;
     public uint nbHouse = 50;
     public uint nbCampagneHouse = 50;
+    public uint nbLighTorch = 300;
+    public uint nbHuman = 200;
 
     public uint cityCenterPerimeter = 50;
     public uint cityBanlieurPerimeter = 100;
@@ -37,9 +39,12 @@ public class ProceduralMapGeneration : MonoBehaviour {
     public Material mur1;
     public Material immeuble;
     public Material road;
+    public GameObject Fire;
+    public GameObject humanPrefab;
 
     public void BuildObject()
     {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
         Reset();
         m_father = new GameObject("City");
 
@@ -68,9 +73,9 @@ public class ProceduralMapGeneration : MonoBehaviour {
 
         MeshRenderer renderer1 = floor.GetComponent<MeshRenderer>();
 
-        renderer1.material = new Material(road);
+        renderer1.sharedMaterial = new Material(road);
         Vector2 size = new Vector2(position, position);
-        renderer1.material.mainTextureScale = size;
+        renderer1.sharedMaterial.mainTextureScale = size;
 
         while ((i < nbSkyscrapper) || (j < nbHouse) || (k < nbCampagneHouse))
         {
@@ -97,9 +102,9 @@ public class ProceduralMapGeneration : MonoBehaviour {
 
                 
                 
-                renderer.material = new Material(immeuble);
+                renderer.sharedMaterial = new Material(immeuble);
                 Vector2 size1 = new Vector2(building.width*0.5f, building.height*0.5f);
-                renderer.material.mainTextureScale = size1;
+                renderer.sharedMaterial.mainTextureScale = size1;
             }
             else // Banlieu
             {
@@ -113,11 +118,11 @@ public class ProceduralMapGeneration : MonoBehaviour {
                 
 
                 int leRandom = m_randomEngine.Next(0,2);
-                if (leRandom == 0){ renderer.material = new Material(mur);}
-                else{renderer.material = new Material(mur1);}
+                if (leRandom == 0){ renderer.sharedMaterial = new Material(mur);}
+                else{renderer.sharedMaterial = new Material(mur1);}
 
                 Vector2 size2 = new Vector2(building.width*1.25f, building.height);
-                renderer.material.mainTextureScale = size2;
+                renderer.sharedMaterial.mainTextureScale = size2;
             }
             buildingObject.transform.position = new Vector3(currentX, buildingObject.transform.localScale.y / 2, currentY);
             
@@ -143,6 +148,80 @@ public class ProceduralMapGeneration : MonoBehaviour {
                     DestroyImmediate(buildingObject);
             }
         }
+
+        /*for(uint n=0; n < nbLighTorch; n++)
+        {
+            uint proba = (uint)m_randomEngine.Next(100);
+
+            float x, y;
+
+            if(proba < 60)
+            {
+                x = (float)((m_randomEngine.NextDouble() - 0.5) * cityCenterPerimeter);
+                y = (float)((m_randomEngine.NextDouble() - 0.5) * cityCenterPerimeter);
+            }
+            else if(proba < 85)
+            {
+                x = cityCenterPerimeter + (float)((m_randomEngine.NextDouble() - 0.5) * cityBanlieurPerimeter);
+                y = cityCenterPerimeter + (float)((m_randomEngine.NextDouble() - 0.5) * cityBanlieurPerimeter);
+            }
+            else
+            {
+                x = cityCenterPerimeter + cityBanlieurPerimeter + (float)((m_randomEngine.NextDouble() - 0.5) * cityCampagnePerimeter);
+                y = cityCenterPerimeter + cityBanlieurPerimeter + (float)((m_randomEngine.NextDouble() - 0.5) * cityCampagnePerimeter);
+            }
+
+            RaycastHit[] hits = Physics.BoxCastAll(new Vector3(x, 0, y), new Vector3(2, 2, 2), Vector3.down);
+            hits = Array.FindAll(hits, (o) => (o.transform.gameObject.name.Contains("batiment_")));
+
+            if (hits.Length == 0)
+            {
+                GameObject l = Instantiate<GameObject>(Fire);
+                l.transform.position = new Vector3(x, 0.44f, y);
+                l.transform.localScale = new Vector3(0.05736747f, 0.05736747f, 0.05736747f);
+                l.transform.parent = m_father.transform;
+            }
+            else
+            {
+                n--;
+            }
+        }*/
+
+        for (uint n = 0; n < nbHuman; n++)
+        {
+            uint proba = (uint)m_randomEngine.Next(100);
+
+            float x, y;
+
+            if (proba < 80)
+            {
+                x = (float)((m_randomEngine.NextDouble() * cityCenterPerimeter) - cityCenterPerimeter * 0.5f);
+                y = (float)((m_randomEngine.NextDouble() * cityCenterPerimeter) - cityCenterPerimeter * 0.5f);
+            }
+            else
+            {
+                x = (float)(m_randomEngine.NextDouble() * position - demiPosition);
+                y = (float)(m_randomEngine.NextDouble() * position - demiPosition);
+            }
+
+            RaycastHit[] hits = Physics.BoxCastAll(new Vector3(x, 0, y), new Vector3(2, 2, 2), Vector3.down);
+            hits = Array.FindAll(hits, (o) => (o.transform.gameObject.name.Contains("batiment_")));
+
+            if (hits.Length == 0)
+            {
+                GameObject l = Instantiate<GameObject>(humanPrefab);
+                l.name = "Human_" + n;
+                l.transform.position = new Vector3(x, 0f, y);
+                l.transform.localScale = new Vector3(0.09536505f, 0.09536505f, 0.09536505f);
+            }
+            else
+            {
+                n--;
+            }
+        }
+        watch.Stop();
+        var elapsedMs = watch.ElapsedMilliseconds;
+        Debug.Log("Generation time : " + elapsedMs / 1000 + "s");
     }
 
     public void Reset()

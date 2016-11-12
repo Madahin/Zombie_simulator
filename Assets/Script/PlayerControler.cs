@@ -21,7 +21,9 @@ public class PlayerControler : MonoBehaviour
     public float thrust;
     public GameObject character;
     public GameObject zombiePrefab;
-    private CharacterController CharCtrl; 
+    private CharacterController CharCtrl;
+
+    public Texture heartTexture;
 
     void Awake()
     {
@@ -32,9 +34,16 @@ public class PlayerControler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         CharCtrl = this.GetComponent<CharacterController>();
         mainCamera = this.GetComponentInChildren<Camera>();
+    }
+
+    void OnGUI()
+    {
+        for (int i = 0; i < transform.parent.gameObject.GetComponent<Entity>().PV; ++i) {
+            GUI.DrawTexture(new Rect(20 + 52 * i, 20, 64, 64), heartTexture);
+        }
     }
 
 
@@ -135,8 +144,17 @@ public class PlayerControler : MonoBehaviour
                 e.Hit();
                 if (e.PV == 0)
                 {
-                    GameObject newZombie = Instantiate(zombiePrefab);
-                    newZombie.transform.position = hit.transform.position;
+                    Vector3 newpos;
+                    NavMeshHit closestHit;
+                    if (NavMesh.SamplePosition(hit.transform.position, out closestHit, 500, 1))
+                    {
+                        newpos = closestHit.position;
+                    }
+                    else
+                    {
+                        newpos = hit.transform.position;
+                    }
+                    GameObject newZombie = Instantiate(zombiePrefab, newpos, Quaternion.identity) as GameObject;
                     newZombie.GetComponent<ZombieFaction>().SetFaction(gameObject.transform.parent.gameObject.GetComponentInChildren<ZombieFaction>().faction);
                     FactionManager.Instance.RemoveEntity(hit.transform.gameObject);
                     FactionManager.Instance.AddEntity(gameObject.transform.parent.gameObject.GetComponentInChildren<ZombieFaction>().faction, newZombie);

@@ -68,32 +68,28 @@ public class HumanIAControler : AbstractIAControler {
 
         if (hits.Length > 0)
         {
-            hits = Array.FindAll(hits, (i) => i.transform.gameObject.tag == "Zombie" && i.distance < visionDistance);
-            if (hits.Length > 0)
+            Vector3 bary = new Vector3();
+            foreach (RaycastHit hit in hits)
             {
-                
-                Vector3 bary = new Vector3();
-                foreach (RaycastHit hit in hits)
-                {
+                if (hit.transform.gameObject.tag == "Zombie" && hit.distance < visionDistance)
                     bary += /*hit.distance * */(hit.transform.position - transform.position);
-                }
-                //Debug.Log(bary);
-                bary.Normalize();
-                GameObject t = new GameObject();
-                t.transform.position = transform.position - (bary * 10);
-                if(target != null)
-                {
-                    Destroy(target.gameObject);
-                }
-                target = t.transform;
             }
-            else
+            //Debug.Log(bary);
+            bary.Normalize();
+            GameObject t = new GameObject();
+            t.transform.position = transform.position - (bary * 10);
+            if (target != null)
             {
-                if (target != null && seeTargetable)
-                {
-                    target = null;
-                    seeTargetable = false;
-                }
+                Destroy(target.gameObject);
+            }
+            target = t.transform;
+        }
+        else
+        {
+            if (target != null && seeTargetable)
+            {
+                target = null;
+                seeTargetable = false;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ZombieIAControler : AbstractIAControler {
     public float fireRate = 0.5F;
@@ -32,10 +33,19 @@ public class ZombieIAControler : AbstractIAControler {
             {
                 ia.wasHit = (int)GetComponent<ZombieFaction>().faction;
             }
-
             if (e.PV == 0)
             {
-                GameObject newZombie = Instantiate(zombiePrefab);
+                Vector3 newpos;
+                NavMeshHit closestHit;
+                if (NavMesh.SamplePosition(target.position, out closestHit, 500, 1))
+                {
+                    newpos = closestHit.position;
+                }
+                else
+                {
+                    newpos = target.position;
+                }
+                GameObject newZombie = Instantiate(zombiePrefab, newpos, Quaternion.identity) as GameObject;
                 newZombie.transform.position = target.transform.position;
                 newZombie.GetComponent<ZombieFaction>().SetFaction(gameObject.GetComponent<ZombieFaction>().faction);
                 FactionManager.Instance.RemoveEntity(target.gameObject);
@@ -43,6 +53,10 @@ public class ZombieIAControler : AbstractIAControler {
                 if (target.gameObject.GetComponent<ZombieFaction>() != null && target.gameObject.GetComponent<ZombieFaction>().IsBoss)
                 {
                     FactionManager.Instance.Wololo(target.gameObject, gameObject.GetComponent<ZombieFaction>().faction);
+                }
+                if (target.gameObject.GetComponentInChildren<PlayerControler>())
+                {
+                    SceneManager.LoadScene("GameOver");
                 }
                 Destroy(target.gameObject);
                 target = null;

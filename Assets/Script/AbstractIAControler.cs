@@ -19,6 +19,8 @@ public abstract class AbstractIAControler : MonoBehaviour {
 
     protected float distanceBetweenTarget = float.MaxValue;
 
+    private float timer = 0;
+
     protected Transform target;
 
     private NavMeshPath path;
@@ -45,10 +47,14 @@ public abstract class AbstractIAControler : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update ()
     {
-
         if (!stop)
         {
-            ComputeIA();
+            timer += Time.deltaTime;
+            if (timer >= 0/*.125f*/)
+            {
+                timer = 0;
+                ComputeIA();
+            }
         }
         else
         {
@@ -77,6 +83,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
         {
             elapsed -= 1.0f;
             NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
+            //Debug.Log(gameObject.name);
             agent.SetPath(path);
         }
         for (int i = 0; i < path.corners.Length - 1; i++)
