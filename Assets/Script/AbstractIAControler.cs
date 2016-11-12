@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 public abstract class AbstractIAControler : MonoBehaviour {
 
     protected System.Random randEngine;
+    public GameObject zombiePrefab;
 
     protected bool seeTargetable = false;
 

@@ -6,6 +6,8 @@ public class HumanIAControler : AbstractIAControler {
 
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
+    public int wasHit = -1;
+    private float timeUntilZombie = 0;
     
 
     // Use this for initialization
@@ -18,6 +20,19 @@ public class HumanIAControler : AbstractIAControler {
 	protected override void Update ()
     {
         base.Update();
+
+        if(wasHit >= 0)
+        {
+            timeUntilZombie += Time.deltaTime;
+
+            if(timeUntilZombie > 30)
+            {
+                GameObject newZombie = Instantiate(zombiePrefab);
+                newZombie.transform.position = target.transform.position;
+                newZombie.GetComponent<ZombieFaction>().faction = (uint)wasHit;
+                Destroy(gameObject);
+            }
+        }
     }
 
     protected override void Attack()

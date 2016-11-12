@@ -64,7 +64,7 @@ public class ProceduralMapGeneration : MonoBehaviour {
         floor.name = "Floor";
         floor.transform.parent = m_father.transform;
         floor.transform.localScale = new Vector3(position, 1, position);
-        floor.transform.position = new Vector3(0, -1, 0);
+        floor.transform.position = new Vector3(0, -0.5f, 0);
 
         MeshRenderer renderer1 = floor.GetComponent<MeshRenderer>();
 
@@ -120,8 +120,7 @@ public class ProceduralMapGeneration : MonoBehaviour {
                 renderer.material.mainTextureScale = size2;
             }
             buildingObject.transform.position = new Vector3(currentX, buildingObject.transform.localScale.y / 2, currentY);
-
-            // TODO : faut pas que les batiemnt se marche dessus
+            
             if (dist < cityCenterPerimeter)
             {
                 if (i < nbSkyscrapper)

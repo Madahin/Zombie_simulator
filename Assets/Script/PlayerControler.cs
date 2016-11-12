@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -19,11 +20,13 @@ public class PlayerControler : MonoBehaviour
     private Camera mainCamera;
     public float thrust;
     public GameObject character;
+    public GameObject zombiePrefab;
     private CharacterController CharCtrl; 
 
     void Awake()
     {
         //GameManager.Instance.Player = this.gameObject;
+        FactionManager.Instance.AddKey(gameObject);
     }
 
     // Use this for initialization
@@ -120,6 +123,31 @@ public class PlayerControler : MonoBehaviour
             positionVec -= mainCamera.transform.forward;
             //character.transform.position = newPosition;
 
+        }
+
+        if(Input.GetButtonUp("Fire1"))
+        {
+            RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 1, 1), transform.forward);
+            hits = Array.FindAll(hits, (i) => ((i.transform.gameObject.tag == "Human") || (i.transform.gameObject.tag == "Zombie" && i.transform.gameObject.GetComponent<ZombieFaction>().faction != gameObject.transform.parent.GetComponent<ZombieFaction>().faction)));
+            foreach(RaycastHit hit in hits)
+            {
+                Entity e = hit.transform.gameObject.GetComponent<Entity>();
+                e.Hit();
+                if (e.PV == 0)
+                {
+                    GameObject newZombie = Instantiate(zombiePrefab);
+                    newZombie.transform.position = hit.transform.position;
+                    newZombie.GetComponent<ZombieFaction>().SetFaction(gameObject.transform.parent.gameObject.GetComponentInChildren<ZombieFaction>().faction);
+                    FactionManager.Instance.RemoveEntity(hit.transform.gameObject);
+                    FactionManager.Instance.AddEntity(gameObject.transform.parent.gameObject.GetComponentInChildren<ZombieFaction>().faction, newZombie);
+                    if (hit.transform.gameObject.GetComponent<ZombieFaction>() != null && hit.transform.gameObject.GetComponentInChildren<ZombieFaction>().IsBoss)
+                    {
+                        Debug.Log("wololo");
+                        FactionManager.Instance.Wololo(hit.transform.gameObject, gameObject.transform.parent.gameObject.GetComponentInChildren<ZombieFaction>().faction);
+                    }
+                    Destroy(hit.transform.gameObject);
+                }
+            }
         }
 
         positionVec.y = 0;

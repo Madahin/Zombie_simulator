@@ -3,7 +3,6 @@ using System.Collections;
 using System;
 
 public class ZombieIAControler : AbstractIAControler {
-
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
     
@@ -22,20 +21,43 @@ public class ZombieIAControler : AbstractIAControler {
 
     protected override void Attack()
     {
-        if(Time.time > nextFire)
+        if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
 
-            int angle = 25;
+            Entity e = target.GetComponent<Entity>();
+            e.Hit();
+            HumanIAControler ia = GetComponentInChildren<HumanIAControler>();
+            if(ia != null)
+            {
+                ia.wasHit = (int)GetComponent<ZombieFaction>().faction;
+            }
+
+            if (e.PV == 0)
+            {
+                GameObject newZombie = Instantiate(zombiePrefab);
+                newZombie.transform.position = target.transform.position;
+                newZombie.GetComponent<ZombieFaction>().SetFaction(gameObject.GetComponent<ZombieFaction>().faction);
+                FactionManager.Instance.RemoveEntity(target.gameObject);
+                FactionManager.Instance.AddEntity(gameObject.GetComponent<ZombieFaction>().faction, newZombie);
+                if (target.gameObject.GetComponent<ZombieFaction>() != null && target.gameObject.GetComponent<ZombieFaction>().IsBoss)
+                {
+                    FactionManager.Instance.Wololo(target.gameObject, gameObject.GetComponent<ZombieFaction>().faction);
+                }
+                Destroy(target.gameObject);
+                target = null;
+            }
+
+            /*int angle = 25;
             Vector3 pushForce;
             do
             {
-                pushForce = GetBallisticVelocity((target.position - transform.position).normalized * 10000f, angle);
+                pushForce = GetBallisticVelocity((target.position - transform.position).normalized, angle);
                 angle--;
             } while (float.IsNaN(pushForce.x) || float.IsNaN(pushForce.y) || float.IsNaN(pushForce.z));
 
             if (angle <= 0) return;
-            target.gameObject.GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Impulse);
+            target.gameObject.GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Impulse);*/
             //target.GetComponent<BarbieLife>().decreaseLife(1);
 
             /*SoundOnAttack soa = GetComponent<SoundOnAttack>();
@@ -49,23 +71,26 @@ public class ZombieIAControler : AbstractIAControler {
 
     protected override void ComputeIA()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, visionDistance, transform.forward);
-
-        if (hits.Length > 0)
+        if (!seeTargetable)
         {
-            hits = Array.FindAll(hits, (i) => i.transform.gameObject.tag == "Human" && i.distance < visionDistance);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, visionDistance, transform.forward);
+
             if (hits.Length > 0)
-            { 
-                Array.Sort(hits, (i1, i2) => i1.distance.CompareTo(i2.distance));
-                target = hits[0].transform;
-                seeTargetable = true;
-            }
-            else
             {
-                if (target != null && seeTargetable)
+                hits = Array.FindAll(hits, (i) => ((i.transform.gameObject.tag == "Human") || (i.transform.gameObject.tag == "Zombie" && i.transform.gameObject.GetComponent<ZombieFaction>().faction != gameObject.GetComponent<ZombieFaction>().faction)) && i.distance < visionDistance);
+                if (hits.Length > 0)
                 {
-                    target = null;
-                    seeTargetable = false;
+                    Array.Sort(hits, (i1, i2) => -i1.distance.CompareTo(i2.distance));
+                    target = hits[0].transform;
+                    seeTargetable = true;
+                }
+                else
+                {
+                    if (target != null && seeTargetable)
+                    {
+                        target = null;
+                        seeTargetable = false;
+                    }
                 }
             }
         }
@@ -73,7 +98,7 @@ public class ZombieIAControler : AbstractIAControler {
         if (target == null)
         {
             GameObject t = new GameObject();
-            t.transform.position = new Vector3((float)(randEngine.NextDouble() - 0.5) * roamingDistance, 0, (float)(randEngine.NextDouble() - 0.5) * roamingDistance) + transform.position;
+            t.transform.position = new Vector3((float)(randEngine.NextDouble() - 0.5) * roamingDistance, transform.position.y, (float)(randEngine.NextDouble() - 0.5) * roamingDistance) + transform.position;
             target = t.transform;
             seeTargetable = false;
         }
@@ -83,14 +108,23 @@ public class ZombieIAControler : AbstractIAControler {
 
             UpdateNavMesh();
 
-            if (distance < minDistance)
+            if(seeTargetable)
             {
-                if (!seeTargetable)
+                if (distance < attackDistance && !target.GetComponent<Entity>().isHit)
+                {
+                    Attack();
+                }
+            }
+            else
+            {
+                if (distance < minDistance)
                 {
                     Destroy(target.gameObject);
+                    target = null;
                 }
-                target = null;
             }
+
+            
         }
     }
 }
